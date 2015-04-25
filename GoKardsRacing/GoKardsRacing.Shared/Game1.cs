@@ -8,7 +8,6 @@ using GoKardsRacing.GameEngine;
 
 namespace GoKardsRacing
 {
-
     public class Game1 : Game
     {
         static GraphicsDeviceManager graphics;
@@ -42,7 +41,7 @@ namespace GoKardsRacing
         protected override void LoadContent()
         {          
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cube = Content.Load<Model>("Model/Arena");         
+            cube = Content.Load<Model>("Model/Terrain");         
             base.LoadContent();
         }
 
@@ -63,7 +62,7 @@ namespace GoKardsRacing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Camera.DrawModel(cube, new Vector3(0, -1, 0));
+            Camera.DrawModel(cube, new Vector3(0, -200, 0));
 
             base.Draw(gameTime);
         }

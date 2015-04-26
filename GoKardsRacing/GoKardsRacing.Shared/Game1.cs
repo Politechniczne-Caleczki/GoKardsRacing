@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using GoKardsRacing.GameEngine;
+using Microsoft.Xna.Framework.Input.Touch;
 
 
 namespace GoKardsRacing
@@ -11,10 +12,9 @@ namespace GoKardsRacing
 
     public class Game1 : Game
     {
-        static GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Model cube;     
-
+        Model cube;
         public static GraphicsDeviceManager Graphics
         {
             get
@@ -35,6 +35,9 @@ namespace GoKardsRacing
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
             Camera.cameraMode = CameraMode.Standard;
             Camera.Position = new Vector3(0, 0, 0);
+           
+            
+            Components.Add(new Menu(this));
             base.Initialize();
         }
 
@@ -42,20 +45,25 @@ namespace GoKardsRacing
         protected override void LoadContent()
         {          
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cube = Content.Load<Model>("Model/Arena");         
+            Services.AddService(typeof(SpriteBatch), spriteBatch);
+            Services.AddService(typeof(ContentManager), this.Content);
+            cube = Content.Load<Model>("Model/Cube");  
+       
             base.LoadContent();
+           
         }
 
 
         protected override void UnloadContent()
-        { 
+        {
         }
 
 
         protected override void Update(GameTime gameTime)
         {
             Camera.Update(gameTime);
-
+            var touchstate = TouchPanel.GetState();
+            
             base.Update(gameTime);
         }
 
@@ -63,8 +71,7 @@ namespace GoKardsRacing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Camera.DrawModel(cube, new Vector3(0, -1, 0));
-
+            Camera.DrawModel(cube, new Vector3(10, 1, 10));
             base.Draw(gameTime);
         }
     }

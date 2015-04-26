@@ -16,8 +16,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Button.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\CameraMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Menu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>

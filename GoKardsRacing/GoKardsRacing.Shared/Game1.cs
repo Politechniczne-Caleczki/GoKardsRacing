@@ -12,7 +12,7 @@ namespace GoKardsRacing
 
     public class Game1 : Game
     {
-        public static GraphicsDeviceManager graphics;
+        private static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Model cube;
         public static GraphicsDeviceManager Graphics
@@ -22,6 +22,8 @@ namespace GoKardsRacing
                 return graphics;
             }
         }
+
+
 
         public Game1()
         {
@@ -70,7 +72,7 @@ namespace GoKardsRacing
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
             Camera.DrawModel(cube, new Vector3(10, 1, 10));
             base.Draw(gameTime);
         }

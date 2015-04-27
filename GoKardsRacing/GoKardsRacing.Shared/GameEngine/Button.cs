@@ -7,40 +7,62 @@ using System.Text;
 
 namespace GoKardsRacing.GameEngine
 {
-    public class Button
+    public delegate void EventHandler(object sender, EventArgs e);
+
+    public class Button: DrawableGameComponent
     {
         #region Fields
 
         private Rectangle location;
-        private readonly Texture2D pressTexture;
-        private int touchID;
+        private Texture2D pressTexture;
+        private string textureName;
         public event EventHandler pressed;
+        SpriteBatch spriteBatch;
+        public bool clickl;
         #endregion
 
         #region Methods
 
-        public Button(Texture2D pressTexture, int x, int y)
+        public Rectangle Location
         {
-            this.pressTexture = pressTexture;
-            location = new Rectangle(x, y, pressTexture.Width, pressTexture.Height);
-        }
-        
-        public void WasPressed(ref TouchCollection touches)
-        { 
-            foreach(var touch in touches)
-            {
-                if (touch.Id == touchID) continue;
-                if (touch.State != TouchLocationState.Pressed) continue;
-                if(location.Contains(touch.Position))
-                {
-                    touchID = touch.Id;
-               }
-            }
+            get { return location; }
+            set { location = value; }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public string TextureName
+        { get { return textureName; } }
+
+        public Button(Game game,string textureName, Rectangle rect):base(game)
         {
+            this.textureName = textureName;
+            location = rect;
+            clickl = false;
+        }
+
+        protected override void LoadContent()
+        {
+            pressTexture = Game.Content.Load<Texture2D>(textureName);
+            base.LoadContent();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch = Game.Services.GetService(
+            typeof(SpriteBatch)) as SpriteBatch;
             spriteBatch.Draw(pressTexture, location,Color.White);
+ 	        base.Draw(gameTime);
+        }
+        public virtual void OnPressed(EventArgs e)
+        {
+            if (pressed != null)
+                pressed(this, e);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if ((float)location.X > GraphicsDevice.PresentationParameters.Bounds.Width * 3 / 4)
+            location.X -= 5;
+            base.Update(gameTime);
         }
 
         #endregion

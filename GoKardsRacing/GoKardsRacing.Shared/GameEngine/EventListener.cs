@@ -7,9 +7,9 @@ namespace GoKardsRacing
 {
     class EventListener
     {
-        private Menu menu;
+        private MainMenu menu;
 
-        public EventListener(Menu menu)
+        public EventListener(MainMenu menu)
         {
             this.menu = menu;
         }

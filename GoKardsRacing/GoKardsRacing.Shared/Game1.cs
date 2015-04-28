@@ -39,7 +39,7 @@ namespace GoKardsRacing
             Camera.Position = new Vector3(0, 0, 0);
            
             
-            Components.Add(new Menu(this));
+            Components.Add(new MainMenu(this));
             base.Initialize();
         }
 

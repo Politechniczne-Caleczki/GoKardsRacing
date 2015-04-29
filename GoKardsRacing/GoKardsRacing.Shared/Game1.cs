@@ -32,7 +32,7 @@ namespace GoKardsRacing
         {
             graphics.IsFullScreen = true;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
-            Camera.cameraMode = CameraMode.Standard;
+            Camera.cameraMode = CameraMode.Double;
             Camera.Position = new Vector3(0, 0, 0);
             base.Initialize();
         }
@@ -41,7 +41,7 @@ namespace GoKardsRacing
         protected override void LoadContent()
         {          
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cube = Content.Load<Model>("Model/terrain2");         
+            cube = Content.Load<Model>("Model/Terrain2");         
             base.LoadContent();
         }
 
@@ -61,7 +61,7 @@ namespace GoKardsRacing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Camera.DrawModel(cube, new Vector3(0, -200, 0));
+            Camera.DrawModel(cube, new Vector3(0, -5, 0));
 
             base.Draw(gameTime);
         }

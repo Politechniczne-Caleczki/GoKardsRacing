@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoKardsRacing.Android", "GoKardsRacing.Android.csproj", "{F00555C1-7F50-4D49-BDB9-A77F0E5A4C83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F00555C1-7F50-4D49-BDB9-A77F0E5A4C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F00555C1-7F50-4D49-BDB9-A77F0E5A4C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F00555C1-7F50-4D49-BDB9-A77F0E5A4C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F00555C1-7F50-4D49-BDB9-A77F0E5A4C83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

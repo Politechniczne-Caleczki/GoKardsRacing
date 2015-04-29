@@ -16,6 +16,7 @@ namespace GoKardsRacing.GameEngine
         {
             CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Game);
             CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Game);
+
             App.Current.Suspending += Current_Suspending;
             App.Current.Resuming += Current_Resuming;
             App.Current.UnhandledException += Current_UnhandledException;

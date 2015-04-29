@@ -30,21 +30,19 @@ namespace GoKardsRacing.GameEngine
             {
                 case MotionSensorType.Accelerometer:
                     {
-                        cameraRotation.X = MathHelper.SmoothStep(cameraRotation.X, -(float)((MotionVector)e.Value).Z * MathHelper.PiOver2, 0.08f);
-                        Vector3 direction = Vector3.Transform(Vector3.Up, Matrix.CreateRotationZ(-(float)((MotionVector)e.Value).Y * MathHelper.PiOver2));
-                        cameraDirection.X = MathHelper.SmoothStep(cameraDirection.X, -direction.X, 0.08f);                        
-                        cameraDirection.Y = MathHelper.SmoothStep(cameraDirection.Y, direction.Y, 0.08f);
+                        cameraRotation.X = MathHelper.SmoothStep(cameraRotation.X, (float)((MotionVector)e.Value).Y * MathHelper.PiOver2, 0.08f);
+                        cameraRotation.Z = MathHelper.SmoothStep(cameraRotation.Z, (float)((MotionVector)e.Value).Z * MathHelper.PiOver2, 0.08f);
+                        Matrix rotation = Matrix.CreateFromYawPitchRoll(cameraRotation.Y, cameraRotation.Z, cameraRotation.X);
+
+                        cameraDirection = Vector3.Transform(Vector3.Up, rotation);
+                        target = Vector3.Transform(Vector3.Forward, rotation);
+
                     } break;
                 case MotionSensorType.Compass:
                     {
-                        cameraRotation.Y = MathHelper.ToRadians(-(float)e.Value.Value);
+                        cameraRotation.Y =  MathHelper.WrapAngle(MathHelper.ToRadians(-(float)((MotionValue)e.Value).Value));
                     }break;
             }
-        }
-
-        public static void Update(GameTime gameTime)
-        {
-            target = Vector3.Transform(cameraRelativeToHead, Matrix.CreateRotationX(cameraRotation.X) * Matrix.CreateRotationY(cameraRotation.Y));
         }
 
         static void Current_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)

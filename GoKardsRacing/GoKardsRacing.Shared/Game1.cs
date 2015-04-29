@@ -41,7 +41,7 @@ namespace GoKardsRacing
         protected override void LoadContent()
         {          
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cube = Content.Load<Model>("Model/Terrain");         
+            cube = Content.Load<Model>("Model/terrain2");         
             base.LoadContent();
         }
 
@@ -53,7 +53,6 @@ namespace GoKardsRacing
 
         protected override void Update(GameTime gameTime)
         {
-            Camera.Update(gameTime);
 
             base.Update(gameTime);
         }

@@ -662,7 +662,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "Terrain/terrain_desert_1.png"
-		RelativeFilename: "I:\Projekt\GoKardsRacing\GoKardsRacing\GoKardsRacing.Shared\Content\Model\Terrain\terrain_desert_1.png"
+		RelativeFilename: "Terrain\terrain_desert_1.png"
 	}
 	Texture: 104807432, "Texture::terrain_desert_1_texture", "" {
 		Type: "TextureVideoClip"
@@ -670,7 +670,7 @@ Objects:  {
 		TextureName: "Texture::terrain_desert_1_texture"
 		Media: "Video::terrain_desert_1_texture"
 		FileName: "Terrain/terrain_desert_1.png"
-		RelativeFilename: "I:\Projekt\GoKardsRacing\GoKardsRacing\GoKardsRacing.Shared\Content\Model\Terrain\terrain_desert_1.png"
+		RelativeFilename: "Terrain\terrain_desert_1.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"

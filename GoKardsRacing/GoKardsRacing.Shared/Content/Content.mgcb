@@ -32,6 +32,11 @@
 /processorParam:TextureFormat=DxtCompressed
 /build:Model/Cube.fbx
 
+#begin Model/terrain2.FBX
+/importer:
+/processor:
+/build:Model/terrain2.FBX
+
 #begin Model/Terrain.fbx
 /importer:FbxImporter
 /processor:ModelProcessor

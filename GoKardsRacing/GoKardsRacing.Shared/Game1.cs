@@ -64,8 +64,12 @@ namespace GoKardsRacing
         protected override void Update(GameTime gameTime)
         {
             Camera.Update(gameTime);
-            var touchstate = TouchPanel.GetState();
-            
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            {
+                #if WINDOWS_PHONE_APP
+                Exit();
+                #endif
+            }
             base.Update(gameTime);
         }
 

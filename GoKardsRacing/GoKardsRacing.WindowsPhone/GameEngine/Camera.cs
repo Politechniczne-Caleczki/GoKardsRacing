@@ -24,16 +24,15 @@ namespace GoKardsRacing.GameEngine
             CrossDeviceMotion.Current.SensorValueChanged += Current_SensorValueChanged;           
         }
 
-
         static void Current_SensorValueChanged(object sender, SensorValueChangedEventArgs e)
         {
             switch (e.SensorType)
             {
                 case MotionSensorType.Accelerometer:
-                    {
+                    {                        
                         cameraRotation.X = MathHelper.SmoothStep(cameraRotation.X, (float)((MotionVector)e.Value).Y * MathHelper.PiOver2, 0.08f);
                         cameraRotation.Z = MathHelper.SmoothStep(cameraRotation.Z, (float)((MotionVector)e.Value).Z * MathHelper.PiOver2, 0.08f);
-                        Matrix rotation = Matrix.CreateFromYawPitchRoll(cameraRotation.Y, cameraRotation.Z, cameraRotation.X);
+                        Matrix rotation = Matrix.CreateFromYawPitchRoll(cameraRotation.Y, cameraRotation.Z, MainGame.MainWindow.CurrentOrientation == DisplayOrientation.LandscapeLeft ? cameraRotation.X : -cameraRotation.X);
 
                         cameraDirection = Vector3.Transform(Vector3.Up, rotation);
                         target = Vector3.Transform(Vector3.Forward, rotation);

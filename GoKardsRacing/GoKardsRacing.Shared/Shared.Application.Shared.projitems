@@ -15,7 +15,66 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\CollisionInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\CollisionSkin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\CollisionSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\CollisionSystemBrute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\CollisionSystemGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\CollisionSystemSAP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\BoxBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\BoxHeightmap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\BoxPlane.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\BoxStaticMesh.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\CapsuleBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\CapsuleCapsule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\CapsuleHeightmap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\CapsulePlane.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\CapsuleStaticMesh.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\DetectFunctor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\SphereBox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\SphereCapsule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\SphereHeightmap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\SpherePlane.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\SphereSphere.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Detection\SphereStaticMesh.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Collision\Materials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Distance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\IndexedTriangle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Intersection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Line.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Octree.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Overlap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\AABox.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\Box.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\Capsule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\Heightmap.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\Plane.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\Primitive.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\Sphere.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Primitives\TriangleMesh.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Rectangle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Geometry\Triangle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\JigLibXException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Math\JiggleMath.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Math\Transform.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\Body.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\Constraint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\ConstraintMaxDistance.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\ConstraintPoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\ConstraintVelocity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\ConstraintWorldPoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\Controller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\HingeJoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\Joint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\PhysicsCollision.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Physics\PhysicsSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Utils\Array2D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Utils\BodyRenderExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Utils\JiggleUnsafe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Vehicles\Car.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Vehicles\Chassis.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JigLibX\Vehicles\Wheel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\CameraMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
@@ -27,5 +86,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)JigLibX\Content\Content.contentproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)JigLibX\Content\Properties\" />
   </ItemGroup>
 </Project>

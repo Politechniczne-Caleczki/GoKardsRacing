@@ -23,7 +23,7 @@ namespace GoKardsRacing.GameEngine
 
         private static Viewport leftViewprot, rightViewport, defaultViewport;
 
-        private static Matrix projectionMatrox, halfProjectionMaxtrix;
+        private static Matrix projectionMatrix, halfProjectionMaxtrix;
 
         private static Vector3 cameraRelativeToHead;
         private static Vector3 cameraRotation;
@@ -46,7 +46,7 @@ namespace GoKardsRacing.GameEngine
                            drawModel_01 = S_DrawModel;
                            drawModel_02 = S_DrawModel;
                            drawModel_03 = S_DrawModel;
-                           Game1.Graphics.GraphicsDevice.Viewport = defaultViewport;
+                           MainGame.Graphics.GraphicsDevice.Viewport = defaultViewport;
                         }break;
                     case CameraMode.Double:
                         {
@@ -73,8 +73,8 @@ namespace GoKardsRacing.GameEngine
                 if(value>0 && value < 100000)
                 {   
                     sight = value;
-                    projectionMatrox = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, defaultViewport.AspectRatio, 0.0001f, sight);
-                    halfProjectionMaxtrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, leftViewprot.AspectRatio, 0.0001f, sight);            
+                    projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, defaultViewport.AspectRatio, 0.01f, sight);
+                    halfProjectionMaxtrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, leftViewprot.AspectRatio, 0.01f, sight);            
                 }
             }
         }
@@ -88,6 +88,14 @@ namespace GoKardsRacing.GameEngine
             set
             {
                 position = value;
+            }
+        }
+
+        public static Vector3 Rotation
+        {
+            get
+            {
+                return cameraRotation;
             }
         }
 
@@ -136,10 +144,11 @@ namespace GoKardsRacing.GameEngine
 
         static Camera()
         {
-            leftViewprot = rightViewport = defaultViewport = Game1.Graphics.GraphicsDevice.Viewport;
+            leftViewprot = rightViewport = defaultViewport = MainGame.Graphics.GraphicsDevice.Viewport;
             leftViewprot.Width = rightViewport.Width = defaultViewport.Width / 2;
             rightViewport.X = leftViewprot.Width;
-            Sight = 10000;       
+            
+            Sight = 100;       
             cameraMode = CameraMode.Standard;
             cameraRelativeToHead = new Vector3(0, 0, 10);
             cameraDirection = Vector3.Up;
@@ -151,29 +160,29 @@ namespace GoKardsRacing.GameEngine
         private static void S_DrawModel(Model model, Vector3 position)
         {
             Matrix world = Matrix.CreateTranslation(position);
-            drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), projectionMatrox);
+            drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), projectionMatrix);
         }
 
         private static void S_DrawModel(Model model, Vector3 position, Vector3 rotation)
         {
             Matrix world = Matrix.CreateRotationX(rotation.X) * Matrix.CreateRotationY(rotation.Y)
                 * Matrix.CreateRotationZ(rotation.Z) * Matrix.CreateTranslation(position);
-            drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), projectionMatrox);
+            drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), projectionMatrix);
         }
 
         private static void S_DrawModel(Model model, Vector3 position, Vector3 rotation, float scale)
         {
             Matrix world = Matrix.CreateRotationX(rotation.X) *
                  Matrix.CreateRotationY(rotation.Y) * Matrix.CreateRotationZ(rotation.Z) * Matrix.CreateScale(scale) * Matrix.CreateTranslation(position);
-            drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), projectionMatrox);
+            drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), projectionMatrix);
         }
 
         private static void D_DrawModel(Model model, Vector3 position)
         {
             Matrix world = Matrix.CreateTranslation(position);
-            Game1.Graphics.GraphicsDevice.Viewport = leftViewprot;
+            MainGame.Graphics.GraphicsDevice.Viewport = leftViewprot;
             drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), halfProjectionMaxtrix);
-            Game1.Graphics.GraphicsDevice.Viewport = rightViewport;
+            MainGame.Graphics.GraphicsDevice.Viewport = rightViewport;
             drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), halfProjectionMaxtrix);
         }
 
@@ -181,9 +190,9 @@ namespace GoKardsRacing.GameEngine
         {
             Matrix world = Matrix.CreateRotationX(rotation.X) * Matrix.CreateRotationY(rotation.Y)
                 * Matrix.CreateRotationZ(rotation.Z) * Matrix.CreateTranslation(position);
-            Game1.Graphics.GraphicsDevice.Viewport = leftViewprot;
+            MainGame.Graphics.GraphicsDevice.Viewport = leftViewprot;            
             drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), halfProjectionMaxtrix);
-            Game1.Graphics.GraphicsDevice.Viewport = rightViewport;
+            MainGame.Graphics.GraphicsDevice.Viewport = rightViewport;
             drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), halfProjectionMaxtrix);
         }
 
@@ -191,9 +200,9 @@ namespace GoKardsRacing.GameEngine
         {
             Matrix world = Matrix.CreateRotationX(rotation.X) * Matrix.CreateRotationY(rotation.Y)
                 * Matrix.CreateRotationZ(rotation.Z) * Matrix.CreateScale(scale) * Matrix.CreateTranslation(position);
-            Game1.Graphics.GraphicsDevice.Viewport = leftViewprot;
+            MainGame.Graphics.GraphicsDevice.Viewport = leftViewprot;
             drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), halfProjectionMaxtrix);
-            Game1.Graphics.GraphicsDevice.Viewport = rightViewport;
+            MainGame.Graphics.GraphicsDevice.Viewport = rightViewport;
             drawModel(model, world, Matrix.CreateLookAt(Position, Target + Position, cameraDirection), halfProjectionMaxtrix);
         }
 

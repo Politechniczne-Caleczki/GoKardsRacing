@@ -131,6 +131,12 @@
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="MonoGame_RemoveXnaAssemblies" AfterTargets="ImplicitlyExpandTargetFramework">
+  	<Message Text="MonoGame - Removing XNA Assembly references!" Importance="normal" />
+  		<ItemGroup>
+    			<ReferencePath Remove="@(ReferencePath)" Condition="'%(Filename)%(Extension)'=='Farseer Physics Portable.dll'" />
+		</ItemGroup>
+  </Target>
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">

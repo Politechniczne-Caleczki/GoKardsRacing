@@ -4,8 +4,12 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using GoKardsRacing.GameEngine;
-
-
+using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Common;
+using FarseerPhysics.Common.TextureTools;
+using FarseerPhysics.Common.Decomposition;
+using System.Collections.Generic;
 
 namespace GoKardsRacing
 {
@@ -15,6 +19,15 @@ namespace GoKardsRacing
         private static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Model cube;
+
+        Texture2D text;
+  
+
+        Texture2D collisionCenter, collisionBorder;
+
+        Body body, bodyCollisionBorde, bodyCollisionCenter;
+
+        Physic physic;
 
         public static GraphicsDeviceManager Graphics
         {
@@ -36,17 +49,23 @@ namespace GoKardsRacing
         {
             graphics = new GraphicsDeviceManager(this);
             mainWindow = Window;            
-            Content.RootDirectory = "Content";                  
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;            
         }
 
         protected override void Initialize()
         {
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
 
+            physic = new Physic(this, new Vector2(0, 0));
+            body = BodyFactory.CreateRectangle(physic.World, 10, 10, 0.1f);
+            body.BodyType = BodyType.Dynamic;           
+
+            Components.Add(physic);
 
             Camera.cameraMode = CameraMode.Standard;
-            Camera.Position = new Vector3(0, 0, 0);
+            Camera.Position = new Vector3(0, 1.3f, 0);          
             
             base.Initialize();
         }
@@ -55,7 +74,26 @@ namespace GoKardsRacing
         protected override void LoadContent()
         {          
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cube = Content.Load<Model>("Model/tor");         
+
+            collisionBorder = Content.Load<Texture2D>("Collision/tor_border");
+            collisionCenter = Content.Load<Texture2D>("Collision/tor_center");
+
+            text = new Texture2D(GraphicsDevice, 1, 1);
+            Color[] colors = new Color[] { Color.White };
+            text.SetData(colors);
+
+            bodyCollisionBorde = BodyFactory.CreateCompoundPolygon(physic.World, getVerticesList(collisionBorder), 1);
+            bodyCollisionBorde.BodyType = BodyType.Static;
+            bodyCollisionCenter = BodyFactory.CreateCompoundPolygon(physic.World, getVerticesList(collisionCenter), 1);
+            bodyCollisionCenter.BodyType = BodyType.Static;
+            bodyCollisionCenter.Position = new Vector2(90, 80);
+
+             body.Position = new Vector2(0,0);  
+
+            //collisionCenter = collisionBorder = null;
+
+            cube = Content.Load<Model>("Model/tor");
+
             base.LoadContent();
         }
 
@@ -66,20 +104,48 @@ namespace GoKardsRacing
 
 
         protected override void Update(GameTime gameTime)
-        {           
-            Camera.Position += Vector3.Transform(new Vector3(0.01f,0,0),Matrix.CreateRotationY(Camera.Rotation.Y+MathHelper.PiOver2));
+        {
+            MouseState mouse = Mouse.GetState();
+            if (mouse.LeftButton == ButtonState.Pressed)
+                body.Position = mouse.Position.ToVector2();
 
+
+            Camera.Update(gameTime);
+            Camera.Position = new Vector3(body.Position.X/10, 5f, body.Position.Y/10);           
 
             base.Update(gameTime);
         }
 
 
         protected override void Draw(GameTime gameTime)
-        {
+        {          
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            Camera.DrawModel(cube, new Vector3(0, -5, 0));
+
+            Camera.DrawModel(cube, new Vector3(20,0,36));
+
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(collisionBorder , new Rectangle((int)bodyCollisionBorde.Position.X, (int)bodyCollisionBorde.Position.Y, collisionBorder.Width, collisionBorder.Height)
+                , null, Color.Red, bodyCollisionBorde.Rotation, Vector2.Zero, SpriteEffects.None, 0f);
+
+            spriteBatch.Draw(collisionCenter, new Rectangle((int)bodyCollisionCenter.Position.X, (int)bodyCollisionCenter.Position.Y, collisionCenter.Width, collisionCenter.Height)
+                , null, Color.Red, bodyCollisionCenter.Rotation, Vector2.Zero, SpriteEffects.None, 0f);            
+
+            spriteBatch.Draw(text, new Rectangle((int)body.Position.X, (int)body.Position.Y , 10, 10)
+                , null, Color.White, body.Rotation, new Vector2(.5f), SpriteEffects.None, 0f);
+            spriteBatch.End();            
 
             base.Draw(gameTime);
+        }
+
+        private List<Vertices> getVerticesList(Texture2D texture)
+        {
+            uint[] textData = new uint[texture.Width * texture.Height];
+            texture.GetData<uint>(textData);
+
+            Vertices verts = TextureConverter.DetectVertices(textData, texture.Width);
+
+            return BayazitDecomposer.ConvexPartition(verts);
         }
     }
 }

@@ -59,8 +59,12 @@ namespace GoKardsRacing
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
 
             physic = new Physic(this, new Vector2(0, 0));
-            body = BodyFactory.CreateRectangle(physic.World, 10, 10, 0.1f);
-            body.BodyType = BodyType.Dynamic;           
+            body = BodyFactory.CreateCircle(physic.World, 5, 1);
+            body.BodyType = BodyType.Dynamic;
+            body.LinearDamping = 0.4f;
+            body.Friction = 0;
+            body.Restitution = 0.8f;
+          
 
             Components.Add(physic);
 
@@ -86,11 +90,11 @@ namespace GoKardsRacing
             bodyCollisionBorde.BodyType = BodyType.Static;
             bodyCollisionCenter = BodyFactory.CreateCompoundPolygon(physic.World, getVerticesList(collisionCenter), 1);
             bodyCollisionCenter.BodyType = BodyType.Static;
-            bodyCollisionCenter.Position = new Vector2(90, 80);
+            bodyCollisionCenter.Position = new Vector2(72, 74);
 
-             body.Position = new Vector2(0,0);  
+             body.Position = new Vector2(480,200);  
 
-            //collisionCenter = collisionBorder = null;
+            collisionCenter = collisionBorder = null;
 
             cube = Content.Load<Model>("Model/tor");
 
@@ -106,12 +110,14 @@ namespace GoKardsRacing
         protected override void Update(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
-            if (mouse.LeftButton == ButtonState.Pressed)
-                body.Position = mouse.Position.ToVector2();
+           // if (mouse.LeftButton == ButtonState.Pressed)
+            body.ApplyLinearImpulse(new Vector2(Camera.Target.X, Camera.Target.Z)*10);
 
-
+  
             Camera.Update(gameTime);
-            Camera.Position = new Vector3(body.Position.X/10, 5f, body.Position.Y/10);           
+            Camera.Position = new Vector3(body.Position.X/10, 2.6f, body.Position.Y/10);
+
+  
 
             base.Update(gameTime);
         }
@@ -121,19 +127,19 @@ namespace GoKardsRacing
         {          
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Camera.DrawModel(cube, new Vector3(20,0,36));
+            Camera.DrawModel(cube, new Vector3(27, 0, 34));
 
+            //spriteBatch.Begin();
+            //spriteBatch.Draw(collisionBorder, new Rectangle((int)bodyCollisionBorde.Position.X, (int)bodyCollisionBorde.Position.Y, collisionBorder.Width, collisionBorder.Height)
+            //     , null, Color.Red, bodyCollisionBorde.Rotation, Vector2.Zero, SpriteEffects.None, 0f);
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(collisionBorder , new Rectangle((int)bodyCollisionBorde.Position.X, (int)bodyCollisionBorde.Position.Y, collisionBorder.Width, collisionBorder.Height)
-                , null, Color.Red, bodyCollisionBorde.Rotation, Vector2.Zero, SpriteEffects.None, 0f);
+            //spriteBatch.Draw(collisionCenter, new Rectangle((int)bodyCollisionCenter.Position.X, (int)bodyCollisionCenter.Position.Y, collisionCenter.Width, collisionCenter.Height)
+            //     , null, Color.Red, bodyCollisionCenter.Rotation, Vector2.Zero, SpriteEffects.None, 0f);
 
-            spriteBatch.Draw(collisionCenter, new Rectangle((int)bodyCollisionCenter.Position.X, (int)bodyCollisionCenter.Position.Y, collisionCenter.Width, collisionCenter.Height)
-                , null, Color.Red, bodyCollisionCenter.Rotation, Vector2.Zero, SpriteEffects.None, 0f);            
+            //spriteBatch.Draw(text, new Rectangle((int)body.Position.X, (int)body.Position.Y, 10, 10)
+            //    , null, Color.White, body.Rotation, new Vector2(.5f), SpriteEffects.None, 0f);
 
-            spriteBatch.Draw(text, new Rectangle((int)body.Position.X, (int)body.Position.Y , 10, 10)
-                , null, Color.White, body.Rotation, new Vector2(.5f), SpriteEffects.None, 0f);
-            spriteBatch.End();            
+            //spriteBatch.End();            
 
             base.Draw(gameTime);
         }

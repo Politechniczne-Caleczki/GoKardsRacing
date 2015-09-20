@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Input;
 using DeviceMotion.Plugin;
 using DeviceMotion.Plugin.Abstractions;
-using System.Diagnostics;
 
 namespace GoKardsRacing.GameEngine
 {
@@ -16,7 +15,6 @@ namespace GoKardsRacing.GameEngine
         {
             CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Game);
             CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Game);
-            CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Game);
 
             App.Current.Suspending += Current_Suspending;
             App.Current.Resuming += Current_Resuming;
@@ -33,23 +31,16 @@ namespace GoKardsRacing.GameEngine
                     {                        
                         cameraRotation.X = MathHelper.SmoothStep(cameraRotation.X, (float)((MotionVector)e.Value).Y * MathHelper.PiOver2, 0.08f);
                         cameraRotation.Z = MathHelper.SmoothStep(cameraRotation.Z, (float)((MotionVector)e.Value).Z * MathHelper.PiOver2, 0.08f);
-                        Matrix rotation = Matrix.CreateFromYawPitchRoll(cameraRotation.Y, cameraRotation.Z, MainGame.MainWindow.CurrentOrientation == DisplayOrientation.LandscapeLeft ? cameraRotation.X : -cameraRotation.X);
+                        Matrix rotation = Matrix.CreateFromYawPitchRoll(cameraRotation.Y, cameraRotation.Z, Main.MainWindow.CurrentOrientation == DisplayOrientation.LandscapeLeft ? cameraRotation.X : -cameraRotation.X);
 
                         cameraDirection = Vector3.Transform(Vector3.Up, rotation);
                         target = Vector3.Transform(Vector3.Forward, rotation);
-
-                        Debug.WriteLine(((MotionVector)e.Value).X);
                     } break;
                 case MotionSensorType.Compass:
                     {
-                        cameraRotation.Y =  MathHelper.WrapAngle(MathHelper.ToRadians(-(float)((MotionValue)e.Value).Value));
+                        cameraRotation.Y =  MathHelper.ToRadians(-(float)((MotionValue)e.Value).Value);
                     }
                     break;
-                case MotionSensorType.Gyroscope:
-                    {
-                      //  cameraRotation.Y = MathHelper.ToRadians((float)((MotionVector)e.Value).X * MathHelper.PiOver4);
-                      //  Debug.WriteLine(((MotionVector)e.Value).X);
-                    }break;
             }
         }
 

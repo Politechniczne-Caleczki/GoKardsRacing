@@ -22,7 +22,7 @@ namespace GoKardsRacing
     /// </summary>
     public sealed partial class GamePage : SwapChainBackgroundPanel
     {
-        readonly MainGame _game;
+        readonly Main _game;
 
         public GamePage(string launchArguments)
         {
@@ -30,7 +30,7 @@ namespace GoKardsRacing
 
             // Create the game.
 
-            _game = XamlGame<MainGame>.Create(launchArguments, Window.Current.CoreWindow, this);
+            _game = XamlGame<Main>.Create(launchArguments, Window.Current.CoreWindow, this);
         }
     }
 }

@@ -15,6 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ApplicationState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ApplicationStateMenager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Collision\Collision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Collision\Distance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Collision\DynamicTree.cs" />
@@ -125,14 +127,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Factories\JointFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Factories\LinkFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Collider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Physic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\CameraMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WorldModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)GamePage.xaml">

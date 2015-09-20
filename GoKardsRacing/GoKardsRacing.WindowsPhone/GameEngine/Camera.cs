@@ -16,6 +16,7 @@ namespace GoKardsRacing.GameEngine
         {
             CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Game);
             CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Game);
+            CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Game);
 
             App.Current.Suspending += Current_Suspending;
             App.Current.Resuming += Current_Resuming;
@@ -37,10 +38,17 @@ namespace GoKardsRacing.GameEngine
                         cameraDirection = Vector3.Transform(Vector3.Up, rotation);
                         target = Vector3.Transform(Vector3.Forward, rotation);
 
+                        Debug.WriteLine(((MotionVector)e.Value).X);
                     } break;
                 case MotionSensorType.Compass:
                     {
                         cameraRotation.Y =  MathHelper.WrapAngle(MathHelper.ToRadians(-(float)((MotionValue)e.Value).Value));
+                    }
+                    break;
+                case MotionSensorType.Gyroscope:
+                    {
+                      //  cameraRotation.Y = MathHelper.ToRadians((float)((MotionVector)e.Value).X * MathHelper.PiOver4);
+                      //  Debug.WriteLine(((MotionVector)e.Value).X);
                     }break;
             }
         }

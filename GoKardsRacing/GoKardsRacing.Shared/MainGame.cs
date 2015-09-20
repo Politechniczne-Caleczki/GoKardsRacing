@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using System.Diagnostics;
 using GoKardsRacing.GameEngine;
 using FarseerPhysics.Factories;
@@ -29,6 +30,8 @@ namespace GoKardsRacing
 
         Physic physic;
 
+        bool tap = false;
+
         public static GraphicsDeviceManager Graphics
         {
             get
@@ -50,7 +53,7 @@ namespace GoKardsRacing
             graphics = new GraphicsDeviceManager(this);
             mainWindow = Window;            
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;            
+            //cały IsMouseVisible = true;            
         }
 
         protected override void Initialize()
@@ -108,16 +111,26 @@ namespace GoKardsRacing
 
 
         protected override void Update(GameTime gameTime)
-        {
-            MouseState mouse = Mouse.GetState();
-           // if (mouse.LeftButton == ButtonState.Pressed)
-            body.ApplyLinearImpulse(new Vector2(Camera.Target.X, Camera.Target.Z)*10);
+        {               
+
+            //body.ApplyLinearImpulse(new Vector2(Camera.Target.X, Camera.Target.Z)*20);
 
   
-            Camera.Update(gameTime);
+            //Camera.Update(gameTime);
             Camera.Position = new Vector3(body.Position.X/10, 2.6f, body.Position.Y/10);
 
-  
+            TouchCollection touches = TouchPanel.GetState();
+
+            if (touches.Count > 0)
+            {
+                if (!tap)
+                {
+                    tap = true;
+                    Camera.cameraMode = Camera.cameraMode == CameraMode.Double ? CameraMode.Standard : CameraMode.Double;
+                }
+            }
+            else
+                tap = false;
 
             base.Update(gameTime);
         }

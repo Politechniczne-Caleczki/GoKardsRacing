@@ -14,7 +14,8 @@ namespace GoKardsRacing
     {
         private static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Model cube;
+        Scene scene;
+        GameStateManager gameStateManager;
         public static GraphicsDeviceManager Graphics
         {
             get
@@ -27,7 +28,9 @@ namespace GoKardsRacing
 
         public Game1()
         {
+            gameStateManager = new GameStateManager(this);
             graphics = new GraphicsDeviceManager(this);
+            scene = new Scene(this, "Menu/Background");
             Content.RootDirectory = "Content";
         }
 
@@ -36,10 +39,7 @@ namespace GoKardsRacing
             graphics.IsFullScreen = true;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
             Camera.cameraMode = CameraMode.Standard;
-            Camera.Position = new Vector3(0, 0, 0);
-           
-            
-            Components.Add(new MainMenu(this));
+            Components.Add(gameStateManager.ManageState(scene));
             base.Initialize();
         }
 
@@ -49,8 +49,6 @@ namespace GoKardsRacing
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
             Services.AddService(typeof(ContentManager), this.Content);
-            cube = Content.Load<Model>("Model/Cube");  
-       
             base.LoadContent();
            
         }
@@ -63,12 +61,11 @@ namespace GoKardsRacing
 
         protected override void Update(GameTime gameTime)
         {
+            
             Camera.Update(gameTime);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
-                #if WINDOWS_PHONE_APP
-                Exit();
-                #endif
+                gameStateManager.PreviousScene();
             }
             base.Update(gameTime);
         }
@@ -77,7 +74,6 @@ namespace GoKardsRacing
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            Camera.DrawModel(cube, new Vector3(10, 1, 10));
             base.Draw(gameTime);
         }
     }

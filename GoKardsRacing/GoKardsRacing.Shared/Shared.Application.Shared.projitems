@@ -19,10 +19,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Button.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\CameraMode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\MainMenu.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Scene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)GameStateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)GamePage.xaml">

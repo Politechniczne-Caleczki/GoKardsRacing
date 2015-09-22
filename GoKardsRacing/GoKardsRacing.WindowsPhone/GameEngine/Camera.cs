@@ -11,6 +11,13 @@ namespace GoKardsRacing.GameEngine
         #endregion //-----------------------------------------------------------------//
 
         #region Methods
+
+        public static void Update(GameTime gameTime)
+        {
+
+        }
+
+
         static partial void Initialize()
         {
             CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Game);

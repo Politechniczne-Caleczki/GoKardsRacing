@@ -6,7 +6,6 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework.Graphics;
 using GoKardsRacing.GameEngine;
 using FarseerPhysics.Factories;
-using System.Diagnostics;
 
  namespace GoKardsRacing.GameEngine
 {

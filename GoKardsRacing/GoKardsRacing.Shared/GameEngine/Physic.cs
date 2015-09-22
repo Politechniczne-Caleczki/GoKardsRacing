@@ -25,10 +25,6 @@ namespace GoKardsRacing.GameEngine
             world = new World(gravitation);            
         }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
 
         public override void Update(GameTime gameTime)
         {

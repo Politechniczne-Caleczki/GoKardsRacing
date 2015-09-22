@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
-using System.Diagnostics;
 
 namespace GoKardsRacing.GameEngine
 {
@@ -16,27 +15,33 @@ namespace GoKardsRacing.GameEngine
 
         public MainGame(Game game) : base(game)
         {
-
         }
 
         protected override void LoadContent()
-        {           
+        {
+            physic = new Physic(Game, Vector2.Zero);
+            physic.Initialize();
             Game.Components.Add(physic);
+            
+            worldModel = new WorldModel(Game, physic, new Vector3(27, 0, 34));
+
+            player = new Player(Game, new Vector3(480, 2, 200), 50, 0.01f, physic);
+
+
+            worldModel.Initialize();
+
+            player.Initialize();
+
+            
             Game.Components.Add(worldModel);
+  
             Game.Components.Add(player);
+
             base.LoadContent();
         }
 
         public override void Initialize()
         {
-            physic = new Physic(Game, Vector2.Zero);
-            worldModel = new WorldModel(Game, physic, new Vector3(27, 0, 34));
-            player = new Player(Game, new Vector3(480, 2, 200), 50, 0.01f, physic);
-
-            physic.Initialize();
-            worldModel.Initialize();
-            player.Initialize();
-
             Camera.cameraMode = Settings.CameraMode;
 
             base.Initialize();
@@ -70,11 +75,10 @@ namespace GoKardsRacing.GameEngine
             }else tap = false;
 
 
-            KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.Escape) || keyState.IsKeyDown(Keys.Back))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
                 ApplicationStateMenager.State = ApplicationState.Menu;
-            }            
+            }
         }
     }
 }

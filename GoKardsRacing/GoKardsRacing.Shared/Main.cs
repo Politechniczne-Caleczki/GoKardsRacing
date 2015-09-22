@@ -54,8 +54,10 @@ namespace GoKardsRacing
         {
             graphics.IsFullScreen = false;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
-           
-            
+
+            mainGame = new MainGame(game);
+            menu = new Menu(game);
+
             base.Initialize();
         }
 
@@ -64,15 +66,11 @@ namespace GoKardsRacing
         {          
             spriteBatch = new SpriteBatch(GraphicsDevice);
             game = this;
-            ApplicationStateMenager.State = ApplicationState.Menu;  
+            ApplicationStateMenager.State = ApplicationState.Menu;
  
             base.LoadContent();
         }
-        
-        protected override void Update(GameTime gameTime)
-        { 
-            base.Update(gameTime);
-        }        
+          
         protected override void Draw(GameTime gameTime)
         {          
             GraphicsDevice.Clear(Color.CornflowerBlue);          
@@ -82,25 +80,16 @@ namespace GoKardsRacing
 
         public static void LoadGame()
         {   
-            if(menu!=null)
-            {
-                game.Components.Remove(menu);
-                menu = null;
-            }
-
-            mainGame = new MainGame(game);
+            game.Components.Clear();
+  
             mainGame.Initialize();
             game.Components.Add(mainGame);
         }
 
         public static void LoadMenu()
         {
-            if (mainGame != null)
-            {
-                game.Components.Remove(mainGame);
-                mainGame = null;
-            }
-            menu = new Menu(game);
+            game.Components.Clear();
+  
             menu.Initialize();
             game.Components.Add(menu);
         }

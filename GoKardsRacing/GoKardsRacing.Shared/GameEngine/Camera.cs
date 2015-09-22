@@ -228,7 +228,7 @@ namespace GoKardsRacing.GameEngine
             MouseState mouseState = Mouse.GetState();
             KeyboardState key = Keyboard.GetState();
             Vector2 shift = Vector2.Zero;
-            if (oldPosition == Point.Zero) oldPosition = mouseState.Position;
+    //        if (oldPosition == Point.Zero) oldPosition = mouseState.Position;
 
             //cameraRotation.Y +=  ((float)(oldPosition.X - mouseState.Position.X)) / 1000f;
             // cameraRotation.X -= ((float)(oldPosition.Y - mouseState.Position.Y)) / 1000f;
@@ -247,7 +247,7 @@ namespace GoKardsRacing.GameEngine
 
             target = Vector3.Transform(cameraRelativeToHead, Matrix.CreateRotationX(cameraRotation.X) * Matrix.CreateRotationY(cameraRotation.Y));
 
-            oldPosition = mouseState.Position;
+        //    oldPosition = mouseState.Position;
         }
 
 

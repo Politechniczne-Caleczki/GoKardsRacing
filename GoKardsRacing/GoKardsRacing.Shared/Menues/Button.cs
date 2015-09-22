@@ -28,6 +28,12 @@ namespace GoKardsRacing.Menues
             DrawOrder = 1;
         }
 
+        public void Tap(Vector2 position)
+        {
+            if (rect.Intersects(new Rectangle((int)position.X, (int)position.Y, 1, 1)))
+                Action();
+        }
+
         public void Tap(Point position)
         {
             if (rect.Intersects(new Rectangle(position.X, position.Y, 1, 1)))

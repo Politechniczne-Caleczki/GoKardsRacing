@@ -16,9 +16,7 @@ namespace GoKardsRacing.GameEngine
 
         public MainGame(Game game) : base(game)
         {
-            physic = new Physic(game, Vector2.Zero);
-            worldModel = new WorldModel(game, physic, new Vector3(27, 0, 34));
-            player = new Player(game, new Vector3(480,2, 200), 50, 0.01f, physic);
+
         }
 
         protected override void LoadContent()
@@ -31,6 +29,10 @@ namespace GoKardsRacing.GameEngine
 
         public override void Initialize()
         {
+            physic = new Physic(Game, Vector2.Zero);
+            worldModel = new WorldModel(Game, physic, new Vector3(27, 0, 34));
+            player = new Player(Game, new Vector3(480, 2, 200), 50, 0.01f, physic);
+
             physic.Initialize();
             worldModel.Initialize();
             player.Initialize();

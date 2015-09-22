@@ -85,6 +85,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GameEngine\Camera.cs" />
+    <Compile Include="GameEngine\Menu\Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

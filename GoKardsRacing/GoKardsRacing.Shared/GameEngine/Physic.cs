@@ -11,7 +11,7 @@ using FarseerPhysics.Common.Decomposition;
 
 namespace GoKardsRacing.GameEngine
 {
-    class Physic : GameComponent
+    public class Physic : GameComponent
     {
         private World world;
         

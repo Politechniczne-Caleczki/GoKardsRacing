@@ -31,7 +31,7 @@ namespace GoKardsRacing
                     }break;
                 case ApplicationState.Menu:
                     {
-                        Main.LoadGame();
+                        Main.LoadMenu();
                     }break;
             }
         }

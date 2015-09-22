@@ -127,16 +127,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Factories\JointFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Factories\LinkFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Farseer\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Physic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameEngine\WorldModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameEngine\CameraMode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menues\Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menues\Menu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WorldModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)GamePage.xaml">

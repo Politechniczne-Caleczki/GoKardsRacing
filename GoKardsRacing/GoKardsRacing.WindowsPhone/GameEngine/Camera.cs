@@ -38,7 +38,7 @@ namespace GoKardsRacing.GameEngine
                     } break;
                 case MotionSensorType.Compass:
                     {
-                        cameraRotation.Y =  MathHelper.ToRadians(-(float)((MotionValue)e.Value).Value);
+                        cameraRotation.Y = MathHelper.WrapAngle(MathHelper.ToRadians(-(float)((MotionValue)e.Value).Value));
                     }
                     break;
             }
